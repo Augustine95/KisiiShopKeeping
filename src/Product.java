@@ -1,10 +1,12 @@
 public class Product {
     private final String name;
     private double price;
+    public static int count;
 
     public Product(String name, double price) {
         this.name = name;
         setPrice(price);
+        count++;
     }
 
     public double getPrice() {
