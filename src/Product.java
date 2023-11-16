@@ -1,3 +1,7 @@
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
+
 public class Product {
     private final String name;
     private double price;
@@ -23,4 +27,10 @@ public class Product {
         return name;
     }
 
+    @Override
+    public String toString() {
+        var formattedPrice = NumberFormat.getCurrencyInstance(Locale.US).format(price);
+
+        return "name: " + name + " for " +  formattedPrice;
+    }
 }
