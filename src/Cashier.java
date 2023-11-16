@@ -1,7 +1,7 @@
 import java.util.Map;
 
 public class Cashier {
-    public static double calculateTotal(Map<Product, Double> boughtProducts) {
+    public static double calculateTotal(Map<Product, Integer> boughtProducts) {
         double total = 0.0;
 
         for (var shelfProduct : boughtProducts.entrySet())
@@ -13,15 +13,11 @@ public class Cashier {
     public static void transact(double total, double payment) {
         var balance = payment - total;
 
-        while (true) {
-            if (balance >= 0) {
-                Console.printBalanceAndCompleteTransaction(balance);
-                break;
-            }
-            else {
-                Console.promptForMoreCash(balance);
-                transact(balance, Console.readNumber());
-            }
+        while (balance < 0) {
+            Console.promptForMoreCash(balance);
+            balance = Console.readNumber() + balance;
         }
+
+        Console.completeTransaction(balance);
     }
 }

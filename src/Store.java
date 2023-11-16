@@ -1,30 +1,30 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Store {
     private final Shelf shelf = new Shelf();
     private final Product[] products =
     { new Product("Milk", 70), new Product("Soda", 100), new Product("Flour", 150) };
-    private final Map<Product, Double> bought = new HashMap<>();
-    private int boughtCount;
+    private final Map<Product, Integer> bought = new HashMap<>();
 
     private void populateShelfWithProducts() {
         Arrays.stream(products).forEach(shelf::addProduct);
     }
 
     public void startShopping() {
+        Console.showHowToStopShopping();
         promptBuying();
 
         while (true) {
+            Console.promptToBuy();
             int productId = (int)Console.readNumber();
             if (productId == 0) break;
             var product = getProductWithId(productId);
-            if (product == null) Console.printErrorIdMessage();
+            if (product == null) Console.printInvalidIdMessage();
             else {
-                Console.promptForQuantity();
-                bought.put(product, validateNumber(Console.readNumber()));
+                Console.promptForQuantity(product);
+                bought.put(product, (int)(validateNumber(Console.readNumber())));
             }
         }
     }
@@ -46,7 +46,6 @@ public class Store {
     private void promptBuying() {
         populateShelfWithProducts();
         Console.logAvailableProducts(shelf);
-        Console.promptToBuy();
     }
 
     private double validateNumber(double quantity) {

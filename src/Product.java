@@ -30,6 +30,6 @@ public class Product {
     public String toString() {
         var formattedPrice = NumberFormat.getCurrencyInstance(Locale.US).format(price);
 
-        return "name: " + name + " for " +  formattedPrice;
+        return name + " for " +  formattedPrice;
     }
 }
