@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Shelf {
     private int count;
@@ -9,7 +10,7 @@ public class Shelf {
         products.put(++count, product);
     }
 
-    public Map<Integer, Product> getProducts() {
-        return products;
+    public Set<Map.Entry<Integer, Product>> getProducts() {
+        return products.entrySet();
     }
 }
