@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        var shelf = new Store().getShelfWithProducts();
-
-        Console.logProducts(shelf);
+        var store = new Store();
+        store.startShopping();
+        store.processPayment();
     }
 }
